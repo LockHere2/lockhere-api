@@ -1,4 +1,4 @@
-import repository from './locker.repository';
+import repository from '../repository/locker.repository';
 
 export default {
     validateParams({ long, lat }) {

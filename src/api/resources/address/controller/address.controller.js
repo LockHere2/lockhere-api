@@ -1,4 +1,4 @@
-import addressService from './address.service';
+import addressService from '../service/address.service';
 
 export default {
     async getAddresses(req, res) {

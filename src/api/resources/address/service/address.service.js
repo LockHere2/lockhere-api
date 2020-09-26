@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import env from '../../../config/env';
+import env from '../../../../config/env';
 
 export default {
     fetchAddresses({ q, limit = 1, min_confidence = 9 }) {

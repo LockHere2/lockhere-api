@@ -1,6 +1,6 @@
-import userService from './user.service';
-import User from './user.model';
-import jwt from '../../helpers/jwt';
+import userService from '../service/user.service';
+import userRepository from '../repository/user.repository';
+import jwt from '../../../helpers/jwt';
 
 export default {
   async signup(req, res) {
@@ -9,20 +9,20 @@ export default {
       if (error) {
         return res.status(400).json(error);
       }
-
-      let hasUser = await User.findOne({ email: value.email });
+      
+      let hasUser = await userRepository.findByEmail(value.email);
       if (hasUser) {
         return res.status(400).json({ message: 'Já existe um usuário com este email.' });
       }
 
-      hasUser = await User.findOne({ cpf: value.cpf });
+      hasUser = await userRepository.findByCpf(value.cpf);
       if (hasUser) {
         return res.status(400).json({ message: 'Já existe um usuário com este Cpf.' });
       }
 
       const encryptedPass = userService.encryptPassword(value.password);
 
-      const user = await User.create({
+      const user = await userRepository.create({
         name: value.name,
         email: value.email,
         password: encryptedPass,
@@ -43,7 +43,7 @@ export default {
       if (error) {
         return res.status(400).json(error);
       }
-      const user = await User.findOne({ email: value.email });
+      const user = await userRepository.findByEmail(value.email);
       if (!user) {
         return res.status(401).json({ message: 'Email ou senha inválidos.' });
       }

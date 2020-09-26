@@ -1,6 +1,6 @@
-import lockerService from './locker.service';
-import lockerRepository from './locker.repository';
-import addressRepository from '../address/address.repository';
+import lockerService from '../service/locker.service';
+import lockerRepository from '../repository/locker.repository';
+import addressRepository from '../../address/repository/address.repository';
 
 export default {
     async getNearbyLockers(req, res) {
