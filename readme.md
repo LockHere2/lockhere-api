@@ -16,5 +16,5 @@ mongod
 ## Run Application
 
 ```shell
-npm start
+npm run dev
 ```
