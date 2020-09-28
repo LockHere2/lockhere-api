@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import lockerGroup from './lockerGroup.model';
-import locker from './locker.model';
+import lockerGroup from '../model/lockerGroup.model';
+import locker from '../model/locker.model';
 
 const ObjectId = mongoose.Types.ObjectId;
 

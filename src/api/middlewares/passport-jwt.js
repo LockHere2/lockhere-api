@@ -1,7 +1,7 @@
 import Passport from 'passport';
 import PassportJWT from 'passport-jwt';
 import env from '../../config/env';
-import User from '../resources/user/user.model';
+import User from '../resources/user/model/user.model';
 
 export const configJWTStrategy = () => {
   const opts = {

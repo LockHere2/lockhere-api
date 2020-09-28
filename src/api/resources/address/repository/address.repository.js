@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import addressModel from './address.model';
+import addressModel from '../model/address.model';
 
 const ObjectId = mongoose.Types.ObjectId;
 

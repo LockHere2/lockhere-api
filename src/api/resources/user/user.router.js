@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import userController from './user.controller';
+import userController from './controller/user.controller';
 
 export const userRouter = express.Router();
 userRouter.post('/signup', userController.signup);
