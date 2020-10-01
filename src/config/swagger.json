@@ -21,7 +21,7 @@
         "/users/signup":{
           "post":{
             "tags": ["Users"],
-            "summary": "APII Endpoint for create User",
+            "summary": "API Endpoint for create User",
             "description" : "Create new User in database",
             "parameters":[
               {
@@ -37,7 +37,7 @@
             "produces" : ["application/json"],
             "responses":{
               "200":{
-                "description" : "New userr has Created",
+                "description" : "New uuser has Created",
                 "schema": {
                  "$ref" : "#definitions/SignupRsp"
                 }
