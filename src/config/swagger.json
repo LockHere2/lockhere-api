@@ -37,7 +37,7 @@
             "produces" : ["application/json"],
             "responses":{
               "200":{
-                "description" : "New user has Created",
+                "description" : "New userr has Created",
                 "schema": {
                  "$ref" : "#definitions/SignupRsp"
                 }
