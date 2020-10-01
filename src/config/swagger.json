@@ -21,7 +21,7 @@
         "/users/signup":{
           "post":{
             "tags": ["Users"],
-            "summary": "API Endpoint for create User",
+            "summary": "APII Endpoint for create User",
             "description" : "Create new User in database",
             "parameters":[
               {
