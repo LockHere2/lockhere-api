@@ -17,7 +17,7 @@ describe('User controller', () => {
             password: "123456",
             repassword: "123456",
             cpf: "12345678910",
-            born: "30.09.2020"
+            born: "30/09/2020"
         }
     });
 

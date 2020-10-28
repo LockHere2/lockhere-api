@@ -19,7 +19,7 @@ export default {
       password: Joi.string().required().min(6).max(15),
       repassword: Joi.string().required().min(6).max(15),
       cpf: Joi.string().required().regex(/^\d{11}$/),
-      born: Joi.date().format('DD.MM.YYYY').required()
+      born: Joi.date().format('DD/MM/YYYY').required()
     });
 
     const { value, error } = Joi.validate(body, schema);

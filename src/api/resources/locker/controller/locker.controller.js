@@ -9,7 +9,7 @@ export default {
         const validator = lockerService.validateParams(req.params);
 
         if (!validator.isValid) {
-            return res.status(400).json({ params: validator.params });
+            return res.status(400).json(validator);
         }
 
         const lockers = await lockerService.findLockersByRange(long, lat);
@@ -28,5 +28,31 @@ export default {
         const lockers = await lockerRepository.findLockersByGroupId(id);
 
         return res.status(200).send({ address, lockers });
+    },
+    async reserveLocker(req, res) {
+        const validator = lockerService.validateReserve(req.body);
+
+        if (!validator.isValid) {
+            return res.status(400).json(validator);
+        }
+
+        const { _id, startDate, endDate, price } = req.body;
+
+        const locker = await lockerRepository.findLockerById(_id);
+        if (!locker) {
+            return res.status(400).json({ message: 'Locker não encontrado' });
+        }
+
+        if (!locker.available) {
+            return res.status(400).json({ message: 'Locker não esta disponivel' });
+        }
+        
+        const sucess = await lockerRepository.createReserve({ userId: req.user.id, lockerId: _id, startDate, endDate, price });
+        
+        if (!sucess) {
+            return res.status(500).json({ message: 'Ocorreu um erro inesperado na criação da reserva' });
+        }
+
+        return res.status(200).json(locker);
     }
 };
