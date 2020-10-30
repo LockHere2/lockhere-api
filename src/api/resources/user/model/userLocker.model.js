@@ -1,3 +1,4 @@
+import { number } from 'joi';
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
@@ -12,10 +13,16 @@ const userLockerSchema = new Schema({
         ref: 'Locker',
         index: true
     },
-    allocation_id: {
-        type: Schema.Types.ObjectId,
-        ref: 'Allocation',
-        index: true
+    start_date: {
+        type: Date,
+        required: true
+    }, 
+    end_date: {
+        type: Date
+    }, 
+    price: {
+        type: Number,
+        required: true
     }
 });
 
