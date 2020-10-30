@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/app.js --exec babel-node --presets env",
-    "test": "cross-env NODE_ENV=testlocal nyc --reporter=text mocha --delay --recursive test --require babel-polyfill --require babel-register --require ./test/index.js --exit",
+    "test": "cross-env NODE_ENV=testlocal nyc --reporter=text --reporter=lcov --reporter=text-lcov mocha --delay --recursive test --require babel-polyfill --require babel-register --require ./test/index.js --exit",
     "sonar-local": "sonar-scanner -Dsonar.host.url=http://localhost:9002",
+    "sonar": "node sonar-project.js",
     "build": "babel src -d dist --source-maps inline --copy-files",
     "heroku-postbuild": "npm install",
     "start": "node /usr/src/app/dist/app.js",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "chai": "^4.2.0",
@@ -41,6 +43,7 @@
     "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.1.3",
     "nodemon": "^1.17.3",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "sonarqube-scanner": "^2.7.0"
   }
 }

@@ -21,6 +21,23 @@ describe('Locker controller', () => {
     });
 
     it('should get lockers nearby', async () => {
+        const long = 'aa';
+        const lat = 'bb';
+        await chai.request(app)
+            .get(`/api/locker/lockers/long/${long}/lat/${lat}`)
+            .set('Authorization', headers.authorization)
+            .then((res) => {
+                const fields = res.body.fields;
+                chai.expect(res).to.have.status(400);
+                chai.expect(fields).to.have.length(2);
+                chai.expect(fields[0].message).to.eq('Longitude inválida');
+                chai.expect(fields[0].field).to.eq('long');
+                chai.expect(fields[1].message).to.eq('Latitute inválida');
+                chai.expect(fields[1].field).to.eq('lat');
+            });
+    });
+
+    it('should get lockers nearby', async () => {
         const long = -47.427297;
         const lat = -22.602373;
         await chai.request(app)

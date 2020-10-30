@@ -1,5 +1,6 @@
 import lockerService from '../service/locker.service';
 import lockerRepository from '../repository/locker.repository';
+import reserveRepository from '../../reserve/repository/reserve.repository';
 import addressRepository from '../../address/repository/address.repository';
 
 export default {
@@ -47,12 +48,16 @@ export default {
             return res.status(400).json({ message: 'Locker não esta disponivel' });
         }
         
-        const sucess = await lockerRepository.createReserve({ userId: req.user.id, lockerId: _id, startDate, endDate, price });
+        const sucess = await reserveRepository.createReserve({ userId: req.user.id, lockerId: _id, startDate, endDate, price });
         
         if (!sucess) {
             return res.status(500).json({ message: 'Ocorreu um erro inesperado na criação da reserva' });
         }
 
         return res.status(200).json(locker);
+    },
+    async getReservesHistory(req, res) {
+        const reservations = await reserveRepository.fetchReservesByUserId(req.user.id, req.query);
+        return res.status(200).json(reservations);
     }
 };

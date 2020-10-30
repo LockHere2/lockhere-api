@@ -5,3 +5,4 @@ dist
 docs.md
 .scannerwork
 .nyc_output
+coverage
