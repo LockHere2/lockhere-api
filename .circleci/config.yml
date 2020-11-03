@@ -5,4 +5,7 @@ workflows:
   node-tests:
     jobs:
       - node/test
-
+        filters:
+          branches:
+            only:
+              - master

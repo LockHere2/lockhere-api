@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/app.js --exec babel-node --presets env",
-    "test": "cross-env NODE_ENV=testlocal nyc --reporter=text --reporter=lcov --reporter=text-lcov mocha --delay --recursive test --require babel-polyfill --require babel-register --require ./test/index.js --exit",
+    "test": "nyc --reporter=text --reporter=lcov --reporter=text-lcov mocha --delay --recursive test --require babel-polyfill --require babel-register --require ./test/index.js --exit",
+    "test-local": "cross-env NODE_ENV=testlocal nyc --reporter=text --reporter=lcov --reporter=text-lcov mocha --delay --recursive test --require babel-polyfill --require babel-register --require ./test/index.js --exit",
     "sonar-local": "sonar-scanner -Dsonar.host.url=http://localhost:9002",
     "sonar": "node sonar-project.js",
     "build": "babel src -d dist --source-maps inline --copy-files",
