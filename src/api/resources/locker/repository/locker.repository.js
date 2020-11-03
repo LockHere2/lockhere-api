@@ -22,5 +22,8 @@ export default {
     },
     findLockerGroupById(id) {
         return lockerGroup.findOne({ _id: new ObjectId(id) });
+    },
+    findLockerById(id) {
+        return locker.findById(id);
     }
 }

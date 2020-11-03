@@ -3,3 +3,6 @@ node_modules
 .DS_Store
 dist
 docs.md
+.scannerwork
+.nyc_output
+coverage

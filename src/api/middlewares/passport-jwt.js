@@ -15,7 +15,7 @@ export const configJWTStrategy = () => {
           return done(err);
         }
         if (user) {
-          return done(null, user);
+          return done(null, { id: user._id });
         }
         return done(null, false);
       });
