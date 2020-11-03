@@ -1,8 +1,9 @@
-import BaseJoi from 'joi';
-import Extension from 'joi-date-extensions';
 import bcrypt from 'bcryptjs';
 
-const Joi = BaseJoi.extend(Extension);
+import userUpdateService from '../service/userUpdate.service';
+import UserValidator from '../validator/user.validator';
+import userModeEnum from '../enum/userMode.enum';
+import ResponseErrorException from '../../../exception/responseError.exception';
 
 export default {
   encryptPassword(palinText) {
@@ -13,30 +14,31 @@ export default {
     return bcrypt.compareSync(plainText, encrypedPassword);
   },
   validateSignup(body) {
-    const schema = Joi.object().keys({
-      name: Joi.string().required(),
-      email: Joi.string().email().required(),
-      password: Joi.string().required().min(6).max(15),
-      repassword: Joi.string().required().min(6).max(15),
-      cpf: Joi.string().required().regex(/^\d{11}$/),
-      born: Joi.date().format('DD/MM/YYYY').required()
-    });
-
-    const { value, error } = Joi.validate(body, schema);
-    if (error && error.details) {
-      return { error };
-    }
-    return { value };
+    const { name, email, password, repassword, cpf, born } = body;
+    const validator = new UserValidator();
+    return validator
+      .name(name)
+      .email(email)
+      .confirmPassword(password, repassword)
+      .cpf(cpf)
+      .born(born)
+      .isValid();
   },
-  validateLogin(body) {
-    const schema = Joi.object().keys({
-      email: Joi.string().email().required(),
-      password: Joi.string().required().min(6).max(15),
-    });
-    const { value, error } = Joi.validate(body, schema);
-    if (error && error.details) {
-      return { error };
-    }
-    return { value };
+  validateLogin(email, password) {
+    const validator = new UserValidator();
+    return validator.email(email).password(password).isValid();
   },
+  updateUser(id, body, mode) {
+    const { BASE_INFO, EMAIL, PASSWORD } = userModeEnum;
+    switch(mode) {
+      case BASE_INFO:
+        return userUpdateService.updateBaseInfo(id, body);
+      case PASSWORD:
+        return userUpdateService.updatePassword(id, body);
+      case EMAIL:
+        return userUpdateService.updateEmail(id, body);
+      default:
+        throw ResponseErrorException.responseError('Modo invalido', 400);
+    }
+  }
 };

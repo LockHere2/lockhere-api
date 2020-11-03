@@ -17,7 +17,7 @@ describe('User controller', () => {
             password: "123456",
             repassword: "123456",
             cpf: "12345678910",
-            born: "30/09/2020"
+            born: "2020-10-30"
         }
     });
 
@@ -39,7 +39,7 @@ describe('User controller', () => {
             .send(userInput)
             .then((res) => {
                 chai.expect(res).to.have.status(400);
-                chai.expect(res.body.details[0].message).to.eq('"email" must be a valid email');
+                chai.expect(res.body.fields[0].message).to.eq('Email inválido');
             });
     });
 
@@ -72,7 +72,7 @@ describe('User controller', () => {
             .send({ email: 'teste@', password: '123456' })
             .then((res) => {
                 chai.expect(res).to.have.status(400);
-                chai.expect(res.body.details[0].message).to.eq('"email" must be a valid email');
+                chai.expect(res.body.fields[0].message).to.eq('Email inválido');
             });
     });
 
@@ -82,7 +82,7 @@ describe('User controller', () => {
             .send({ email: 'teste@teste.com', password: '1234' })
             .then((res) => {
                 chai.expect(res).to.have.status(400);
-                chai.expect(res.body.details[0].message).to.eq('"password" length must be at least 6 characters long');
+                chai.expect(res.body.fields[0].message).to.eq('Senha inválida');
             });
     });
 

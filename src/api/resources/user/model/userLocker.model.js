@@ -1,5 +1,5 @@
-import { number } from 'joi';
 import mongoose from 'mongoose';
+import statusEnum from '../../reserve/enum/status.enum';
 
 const { Schema } = mongoose;
 const userLockerSchema = new Schema({
@@ -22,6 +22,11 @@ const userLockerSchema = new Schema({
     }, 
     price: {
         type: Number,
+        required: true
+    },
+    status: {
+        type: String,
+        enum : statusEnum.toArray(),
         required: true
     }
 });
