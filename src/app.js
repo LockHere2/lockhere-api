@@ -8,6 +8,8 @@ import swaggerDocument from './config/swagger.json';
 import { configJWTStrategy } from './api/middlewares/passport-jwt';
 
 const app = express();
+app.disable("x-powered-by");
+
 const PORT = process.env.PORT || 3000;
 
 connect();
@@ -44,3 +46,5 @@ app.use((error, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server is running at PORT http://localhost:${PORT}`);
 });
+
+export default app;

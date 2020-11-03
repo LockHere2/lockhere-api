@@ -8,12 +8,6 @@ module.exports = {
     env: {
       node: true
     },
-    'prettier/prettier': [
-      'error',
-      {
-        singleQuote: true
-      }
-    ],
     quotes: [
       2,
       'single',
