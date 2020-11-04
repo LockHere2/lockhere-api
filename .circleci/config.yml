@@ -1,15 +1,12 @@
 version: 2.1
 orbs:
-  node: circleci/node@3.0.0
+  node: circleci/node@4.0.0
   sonarcloud: sonarsource/sonarcloud@1.0.2
 jobs:
   build:
     docker:
       - image: 'cimg/base:stable'
     steps:
-    - node/install:
-        install-yarn: true
-    - run: node --version
     - checkout
     - sonarcloud/scan
 workflows:
