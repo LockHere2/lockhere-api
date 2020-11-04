@@ -4,6 +4,8 @@ orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.2
 jobs:
   build:
+    docker:
+      - image: 'cimg/base:stable'
     steps:
     - node/install:
         install-yarn: true
