@@ -7,7 +7,7 @@ jobs:
   build:
     filters:
       branches:
-      only: develop
+        only: develop
     docker:
       - image: circleci/node:12
 
@@ -28,15 +28,5 @@ jobs:
       - run: npm test
        
       - sonarcloud/scan
-  # deploy-prod:
-  #   requires:
-  #     - build
-  #   filters:
-  #     branches:
-  #       only: master
-  #   steps:
-  #     - run:
-  #       name: Deploy circle-ci to Umbler Master
-  #       command: |
-  #         git push https://geonosis.deploy.umbler.com/jy488y0j/lockhere-com-br.git
+
 
