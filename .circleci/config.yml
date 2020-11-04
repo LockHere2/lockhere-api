@@ -4,7 +4,7 @@ orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
 
 jobs:
-  build:
+  - build:
     docker:
       - image: circleci/node:12
 
@@ -24,13 +24,17 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: npm test
+       
+      - sonarcloud/scan
+  - deploy-prod:
+    requires:
+      - build
+    filters:
+      branches:
+        only: master
+    steps:
       - run:
         name: Deploy circle-ci to Umbler Master
         command: |
           git push https://geonosis.deploy.umbler.com/jy488y0j/lockhere-com-br.git
-        filters:
-          branches:
-            only:
-              - master       
-      - sonarcloud/scan
 
