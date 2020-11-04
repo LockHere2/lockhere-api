@@ -10,3 +10,8 @@ workflows:
             branches:
               only:
                 - master
+      - run_sonar_cloud:
+          filters:
+            branches:
+              only:
+                - master
