@@ -12,8 +12,6 @@ jobs:
 workflows:
   node-tests:
     jobs:
-      - build:
-        context: sonarcloud
       - node/test:
           filters:
             branches:
