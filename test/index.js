@@ -8,7 +8,8 @@ import address from './pre-scripts/address';
 
 function dropDatabase() {
     return new Promise((resolve, reject) => {
-        mongoose.connection.db.dropDatabase(() => { 
+        mongoose.connection.db.dropDatabase((err) => {
+            console.log(err) 
             console.log('db_api_test deletado'); 
             resolve()
         });
