@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@4.0.0
+  #node: circleci/node@4.0.0
   sonarcloud: sonarsource/sonarcloud@1.0.2
 jobs:
   build:
@@ -12,10 +12,6 @@ jobs:
 workflows:
   node-tests:
     jobs:
-      - node/test:
-          filters:
-            branches:
-              only:
-                - master
+      - node/test
       - build:
           context: sonarcloud
