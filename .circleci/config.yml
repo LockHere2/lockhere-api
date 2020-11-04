@@ -17,4 +17,5 @@ workflows:
             branches:
               only:
                 - master
-
+      - build:
+          context: sonarcloud
