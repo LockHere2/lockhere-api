@@ -10,7 +10,6 @@ jobs:
 
     steps:
       - checkout
-
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
@@ -24,6 +23,14 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm test            
+      - run: npm test
+      - run:
+        name: Deploy circle-ci to Umbler Master
+        command: |
+          git push https://geonosis.deploy.umbler.com/jy488y0j/lockhere-com-br.git
+        filters:
+          branches:
+            only:
+              - master       
       - sonarcloud/scan
 
