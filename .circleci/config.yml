@@ -4,10 +4,6 @@ orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
 
 jobs:
-  filters:
-    branches:
-      only: 
-        - develop
   build:
     docker:
       - image: circleci/node:12
@@ -29,5 +25,13 @@ jobs:
       - run: npm test
        
       - sonarcloud/scan
+workflows:
+    build:
+      jobs:
+        - build:
+            filters:
+              branches:
+                only:
+                  - develop
 
 
