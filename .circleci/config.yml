@@ -28,8 +28,8 @@ jobs:
       - sonarcloud/scan
 
       - run:
-        name: Deploy circle-ci to Umbler Master
-        command: git push https://geonosis.deploy.umbler.com/jy488y0j/lockhere-com-br.git
+          name: Deploy circle-ci to Umbler Master
+          command: git push https://geonosis.deploy.umbler.com/jy488y0j/lockhere-com-br.git
   # deploy-prod:
   #   requires:
   #     - build
