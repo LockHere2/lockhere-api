@@ -21,10 +21,13 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
+  teste:
+    steps:
       - run: npm test
-       
+  sonar:
+    steps:
       - sonarcloud/scan
+
 workflows:
     build:
       jobs:
@@ -32,6 +35,16 @@ workflows:
             filters:
               branches:
                 only:
-                  - develop
+                  - circle-ci
+        - teste:
+            filters:
+              branches:
+                only:
+                  - circle-ci
+        - sonar:
+            filters:
+              branches:
+                only:
+                  - circle-ci
 
 
