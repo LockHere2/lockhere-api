@@ -23,6 +23,10 @@ const userSchema = new Schema({
   born: {
     type: Date,
     required: true
+  },
+  verified: {
+    type: Boolean,
+    default: false
   }
 });
 
