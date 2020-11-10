@@ -25,11 +25,13 @@ jobs:
     docker:
       - image: circleci/node:12
     steps:
+      - checkout
       - run: npm test
   sonar:
     docker:
       - image: circleci/node:12
     steps:
+      - checkout
       - sonarcloud/scan
 
 workflows:
