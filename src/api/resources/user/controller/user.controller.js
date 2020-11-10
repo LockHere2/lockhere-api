@@ -76,10 +76,11 @@ export default {
   
       return res.status(200).json({ success: true });
     } catch(e) {
+      console.log(e)
       return res.status(e.statusCode).json(e);
     }
   },
   authenticate(req, res) {
     return res.json(req.user);
-  },
+  }
 };

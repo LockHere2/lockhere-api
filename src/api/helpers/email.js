@@ -1,28 +1,23 @@
 import nodemailer from 'nodemailer';
+import env from '../../config/env';
+import ResponseErrorException from '../exception/responseError.exception';
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'youremail@gmail.com',
-        pass: 'yourpassword'
+        user: env.companyEmail,
+        pass: env.companyEmailPassword
     }
 });
 
-const mailOptions = {
-    from: 'youremail@gmail.com',
-    to: 'myfriend@yahoo.com',
-    subject: 'Sending Email using Node.js',
-    text: 'That was easy!'
-};
-
 export default {
-    sendMail(mailOptions = { to: '', subject: '', text: '' }) {
+    sendMail(mailOptions = { from: env.companyEmail, to: '', subject: '', text: '' }) {
         return new Promise((resolve, reject) => {
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
-                    reject(error);
+                    return reject(ResponseErrorException.responseError('Falha no envio do email', 500));
                 } else {
-                    resolve();
+                    return resolve();
                 }
             });
         });
