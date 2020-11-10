@@ -22,9 +22,13 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
   teste:
+    docker:
+      - image: circleci/node:12
     steps:
       - run: npm test
   sonar:
+    docker:
+      - image: circleci/node:12
     steps:
       - sonarcloud/scan
 
