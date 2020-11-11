@@ -36,7 +36,7 @@ jobs:
 
       - run:
           name: Deploy to umbler
-          command: ls -la && git config --global user.email "mateusspadacio@gmail.com" && git config --global user.name "Mateus Spadacio" && git remote add umbler ssh://git@geonosis.deploy.umbler.com:9922/jy488y0j/lockhere-com-br.git && git branch -a && git checkout master && git pull umbler master --no-commit --allow-unrelated-histories && git status && ls -la && git commit -m "deploy" && git push umbler master
+          command: ls -la && git config --global user.email "mateusspadacio@gmail.com" && git config --global user.name "Mateus Spadacio" && git remote add umbler ssh://git@geonosis.deploy.umbler.com:9922/jy488y0j/lockhere-com-br.git && git push umbler master
             
 workflows:
     build:
