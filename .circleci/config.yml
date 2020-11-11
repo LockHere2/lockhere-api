@@ -25,6 +25,15 @@ jobs:
       - run: npm test
        
       - sonarcloud/scan
+
+      - add_ssh_keys:
+          fingerprints:
+            - "UKs0GF/qdI7FRRpdP6+vEaepVPJbfrcMIDlsaOkfAZI"
+      
+      - run:
+          name: Deploy to umbler
+          command: git remote add umbler ssh://git@geonosis.deploy.umbler.com:9922/jy488y0j/lockhere-com-br.git && git push umbler master
+            
 workflows:
     build:
       jobs:
