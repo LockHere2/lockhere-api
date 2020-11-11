@@ -30,7 +30,8 @@ jobs:
     docker:
       - image: circleci/node:12
     
-    steps:  
+    steps:
+      - checkout  
       - run:
           name: Avoid hosts unknown
           command: echo -e "Host geonosis.deploy.umbler.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
