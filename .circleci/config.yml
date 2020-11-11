@@ -26,10 +26,11 @@ jobs:
        
       - sonarcloud/scan
     
-    deploy:
-      docker:
-        - image: circleci/node:12
-
+  deploy:
+    docker:
+      - image: circleci/node:12
+    
+    steps:  
       - run:
           name: Avoid hosts unknown
           command: echo -e "Host geonosis.deploy.umbler.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
