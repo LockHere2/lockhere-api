@@ -28,7 +28,7 @@ jobs:
 
       - add_ssh_keys:
           fingerprints:
-            - "UKs0GF/qdI7FRRpdP6+vEaepVPJbfrcMIDlsaOkfAZI"
+            - "6c:2a:a8:3d:ec:1a:11:d4:eb:63:92:f9:f1:d2:dc:da"
       
       - run:
           name: Deploy to umbler
