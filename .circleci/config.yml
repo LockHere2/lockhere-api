@@ -25,6 +25,19 @@ jobs:
       - run: npm test
        
       - sonarcloud/scan
+
+      - run:
+          name: Avoid hosts unknown
+          command: echo -e "Host geonosis.deploy.umbler.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+
+      - add_ssh_keys:
+          fingerprints:
+            - "6c:2a:a8:3d:ec:1a:11:d4:eb:63:92:f9:f1:d2:dc:da"
+      
+      - run:
+          name: Deploy to umbler
+          command: git remote add umbler ssh://git@geonosis.deploy.umbler.com:9922/jy488y0j/lockhere-com-br.git && git push umbler master
+            
 workflows:
     build:
       jobs:
@@ -32,4 +45,4 @@ workflows:
             filters:
               branches:
                 only:
-                  - develop
+                  - master
