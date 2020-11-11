@@ -9,6 +9,7 @@ jobs:
       - image: circleci/node:12
 
     steps:
+      - checkout
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
@@ -20,19 +21,10 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-  teste:
-    docker:
-      - image: circleci/node:12
-    steps:
-      - checkout
-      - run: npm test
-  sonar:
-    docker:
-      - image: circleci/node:12
-    steps:
-      - checkout
-      - sonarcloud/scan
 
+      - run: npm test
+       
+      - sonarcloud/scan
 workflows:
     build:
       jobs:
@@ -40,20 +32,4 @@ workflows:
             filters:
               branches:
                 only:
-                  - circle-ci
-    teste:
-      jobs:
-        - teste:
-            filters:
-              branches:
-                only:
-                  - circle-ci
-    sonar:
-      jobs:
-        - sonar:
-            filters:
-              branches:
-                only:
-                  - circle-ci
-
-
+                  - develop
