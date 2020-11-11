@@ -36,7 +36,7 @@ jobs:
 
       - run:
           name: Deploy to umbler
-          command: git remote add umbler ssh://git@geonosis.deploy.umbler.com:9922/jy488y0j/lockhere-com-br.git && git pull && git push umbler master
+          command: git remote add umbler ssh://git@geonosis.deploy.umbler.com:9922/jy488y0j/lockhere-com-br.git && git pull origin master && git push umbler master
             
 workflows:
     build:
