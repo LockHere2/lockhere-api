@@ -15,16 +15,20 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
 
-      #- run: npm install
+      - run: npm install
       - run: node -v
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      #- run: npm test
+      - run: npm test
        
-      #- sonarcloud/scan
+      - sonarcloud/scan
+    
+    deploy:
+      docker:
+        - image: circleci/node:12
 
       - run:
           name: Avoid hosts unknown
@@ -36,12 +40,17 @@ jobs:
 
       - run:
           name: Deploy to umbler
-          command: ls -la && git config --global user.email "mateusspadacio@gmail.com" && git config --global user.name "Mateus Spadacio" && git remote add umbler ssh://git@geonosis.deploy.umbler.com:9922/jy488y0j/lockhere-com-br.git && git pull umbler master --no-commit && git commit -m "deploy" && git push umbler master
+          command: git config --global user.email "mateusspadacio@gmail.com" && git config --global user.name "Mateus Spadacio" && git remote add umbler ssh://git@geonosis.deploy.umbler.com:9922/jy488y0j/lockhere-com-br.git && git pull umbler master --no-commit && git commit -m "deploy" && git push umbler master
             
 workflows:
     build:
       jobs:
         - build:
+            filters:
+              branches:
+                only:
+                  - develop
+        - deploy:
             filters:
               branches:
                 only:
