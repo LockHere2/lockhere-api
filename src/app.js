@@ -44,7 +44,7 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running at PORT http://localhost:${PORT}`);
+  console.log(`Server is running at PORT ${PORT}`);
 });
 
 export default app;
