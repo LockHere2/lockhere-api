@@ -2,8 +2,8 @@ import moment from 'moment';
 import userService from '../service/user.service';
 import userRepository from '../repository/user.repository';
 import userConfirmActionRepository from '../repository/userConfirmAction.repository';
-import UserValidator from '../validator/user.validator';
-import ResponseErrorException from '../../../exception/responseError.exception';
+import UserValidator from '../validator/UserValidator';
+import ResponseErrorException from '../../../exception/ResponseErrorException';
 import userConfirmActionEnum from '../enum/userConfirmAction.enum';
 
 export default {
