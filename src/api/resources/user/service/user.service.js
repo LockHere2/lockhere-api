@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import moment from 'moment';
+
 import userUpdateService from '../service/userUpdate.service';
 import UserValidator from '../validator/UserValidator';
 import userModeEnum from '../enum/userMode.enum';
