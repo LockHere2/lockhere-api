@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import env from '../../config/env';
-import ResponseErrorException from '../exception/responseError.exception';
+import ResponseErrorException from '../exception/ResponseErrorException';
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',

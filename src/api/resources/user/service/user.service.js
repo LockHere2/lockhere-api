@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs';
 
 import userUpdateService from '../service/userUpdate.service';
-import UserValidator from '../validator/user.validator';
+import UserValidator from '../validator/UserValidator';
 import userModeEnum from '../enum/userMode.enum';
-import ResponseErrorException from '../../../exception/responseError.exception';
+import ResponseErrorException from '../../../exception/ResponseErrorException';
 
 export default {
   encryptPassword(palinText) {

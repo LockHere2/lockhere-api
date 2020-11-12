@@ -2,7 +2,7 @@ import moment from 'moment';
 import userEmailService from '../service/userEmail.service';
 import userConfirmActionRepository from '../repository/userConfirmAction.repository';
 import userRepository from '../repository/user.repository';
-import ResponseErrorException from '../../../exception/responseError.exception';
+import ResponseErrorException from '../../../exception/ResponseErrorException';
 import generateCode from '../../../helpers/generateCode';
 import userConfirmActionEnum from '../enum/userConfirmAction.enum';
 

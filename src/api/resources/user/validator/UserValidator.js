@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { Field, Validator } from '../../../validator/';
+import { Field, Validator } from '../../../validator';
 
 const CPF_REGEXP = /^\d{11}$/;
 const EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
