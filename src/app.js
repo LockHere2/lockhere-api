@@ -8,7 +8,8 @@ import swaggerDocument from './config/swagger.json';
 import { configJWTStrategy } from './api/middlewares/passport-jwt';
 
 // TELEMETRIA
-require('appmetrics-dash').monitor();
+// require('appmetrics-dash').monitor();
+require('appmetrics-dash').attach();
 
 const app = express();
 app.disable("x-powered-by");
