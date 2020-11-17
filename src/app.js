@@ -9,6 +9,9 @@ import { configJWTStrategy } from './api/middlewares/passport-jwt';
 // TELEMETRIA
 require('appmetrics-dash').monitor();
 
+// TELEMETRIA
+require('appmetrics-dash').monitor();
+
 const app = express();
 app.disable("x-powered-by");
 
