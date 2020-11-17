@@ -6,8 +6,6 @@ import { connect } from './config/db';
 import { restRouter } from './api';
 import swaggerDocument from './config/swagger.json';
 import { configJWTStrategy } from './api/middlewares/passport-jwt';
-// TELEMETRIA
-require('appmetrics-dash').monitor();
 
 // TELEMETRIA
 require('appmetrics-dash').monitor();
