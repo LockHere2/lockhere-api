@@ -6,6 +6,8 @@ import { connect } from './config/db';
 import { restRouter } from './api';
 import swaggerDocument from './config/swagger.json';
 import { configJWTStrategy } from './api/middlewares/passport-jwt';
+// TELEMETRIA
+require('appmetrics-dash').monitor();
 
 const app = express();
 app.disable("x-powered-by");
