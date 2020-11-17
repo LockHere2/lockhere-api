@@ -15,6 +15,10 @@ export default {
             throw 'Não é possivel cancelar uma alocação já iniciada';
         }
 
+        if (status === statusEnum.CANCELED && userLocker.status === statusEnum.SCHEDULED) {
+            // realizar reembolso
+        }
+
         await reserveRepository.updateReserveStatus(id, status);
     },
     async finishReserve(id) {
