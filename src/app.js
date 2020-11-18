@@ -8,7 +8,6 @@ import swaggerDocument from './config/swagger.json';
 import { configJWTStrategy } from './api/middlewares/passport-jwt';
 
 // TELEMETRIA
-// require('appmetrics-dash').monitor();
 require('appmetrics-dash').attach();
 
 const app = express();
@@ -22,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'development') {
   app.use(logger('dev'));
 }
-app.use(passport.initialize()); // req.user
+app.use(passport.initialize());
 configJWTStrategy();
 app.use('/api', restRouter);
 app.use(
