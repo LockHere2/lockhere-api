@@ -24,5 +24,11 @@ export default {
     async finishReserve(id) {
         await this.updateReserveStatus(id, statusEnum.DONE);
         await reserveRepository.updateReserve(id, { end_date: new Date() });
+    },
+    fetchReservesByUserId(id, options) {
+        if (!options.status) {
+            options.status = statusEnum.toArray();
+        }
+        return reserveRepository.fetchReservesByUserId(id, options);
     }
 }

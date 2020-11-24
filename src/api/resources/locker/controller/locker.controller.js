@@ -83,7 +83,12 @@ export default {
         }
     },
     async getReservesHistory(req, res) {
-        const reservations = await reserveRepository.fetchReservesByUserId(req.user.id, req.query);
-        return res.status(200).json(reservations);
+        try {
+            const reservations = await reserveService.fetchReservesByUserId(req.user.id, req.query);
+            return res.status(200).json(reservations);
+        } catch(e) {
+            console.log(e)
+            return res.status(500).json({ message: 'Ocorreu um erro inesperado' });
+        }        
     }
 };

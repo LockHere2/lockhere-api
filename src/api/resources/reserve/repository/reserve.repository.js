@@ -56,7 +56,7 @@ export default {
 
     },
     async fetchReservesByUserId(id, options = { page: 1, orderBy: 'start_date', direction: 'asc' }) {
-        const userReservations = await userLocker.find({ user_id: new ObjectId(id) })
+        const userReservations = await userLocker.find({ user_id: new ObjectId(id), status: { $in: options.status } })
             .limit(FETCH_LIMIT)
             .skip((options.page * FETCH_LIMIT) - FETCH_LIMIT)
             .sort({ [options.orderBy]: options.direction })
