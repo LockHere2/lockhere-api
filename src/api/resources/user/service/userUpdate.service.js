@@ -44,7 +44,7 @@ export default {
             throw ResponseErrorException.responseError('Já existe um usuário com este email', 400);
         }
 
-        const { action, confirm_code, expire } = await userConfirmActionRepository.findUserConfirmActionByUserId(user._id);
+        const { action, confirm_code, expire } = await userConfirmActionRepository.findUserConfirmActionByUserId(id);
 
         if (!confirm_code) {
             throw ResponseErrorException.responseError('Você não possuí um código de verificação', 400);
