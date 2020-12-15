@@ -9,6 +9,9 @@ const NOT_AVAILABLE = 0;
 const FETCH_LIMIT = 10;
 
 export default {
+    findReserve(id) {
+        return userLocker.findById(id);
+    },
     async createReserve({ userId, lockerId, startDate, endDate, price, status }) {
         const conn = mongoose.connection;
         let session = await conn.startSession();
