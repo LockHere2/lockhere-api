@@ -58,9 +58,10 @@ export default {
     },
     async finishReserve(req, res) {
         const { id } = req.params;
+        const { price } = req.body;
 
         try {
-            await reserveService.finishReserve(id);
+            await reserveService.finishReserve(id, price);
             return res.status(200).json({ success: true });
         } catch(e) {
             return res.status(500).json({ message: 'Ocorreu uma falha ao finalizar a reserva.' });

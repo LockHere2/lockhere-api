@@ -21,9 +21,9 @@ export default {
 
         await reserveRepository.updateReserveStatus(id, status);
     },
-    async finishReserve(id) {
+    async finishReserve(id, price) {
         await this.updateReserveStatus(id, statusEnum.DONE);
-        await reserveRepository.updateReserve(id, { end_date: new Date() });
+        await reserveRepository.updateReserve(id, { end_date: new Date(), price });
     },
     fetchReservesByUserId(id, options) {
         if (!options.status) {
