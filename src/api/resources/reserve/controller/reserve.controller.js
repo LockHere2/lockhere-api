@@ -1,4 +1,3 @@
-import lockerService from '../../locker/service/locker.service';
 import lockerRepository from '../../locker/repository/locker.repository';
 import reserveService from '../service/reserve.service';
 import reserveRepository from '../repository/reserve.repository';
@@ -17,13 +16,13 @@ export default {
         return res.status(200).json(reservation);
     },
     async reserveLocker(req, res) {
-        const validator = lockerService.validateReserve(req.body);
+        const validator = reserveService.validateReserve(req.body);
 
         if (!validator.isValid) {
             return res.status(400).json(validator);
         }
 
-        const { _id, startDate, endDate, price, status } = req.body;
+        const { _id, start_date, end_date, price, status } = req.body;
 
         const locker = await lockerRepository.findLockerById(_id);
         if (!locker) {
@@ -34,7 +33,7 @@ export default {
             return res.status(400).json({ message: 'Locker não esta disponivel' });
         }
         
-        const sucess = await reserveRepository.createReserve({ userId: req.user.id, lockerId: _id, startDate, endDate, price, status });
+        const sucess = await reserveRepository.createReserve({ userId: req.user.id, lockerId: _id, start_date, end_date, price, status });
         
         if (!sucess) {
             return res.status(500).json({ message: 'Ocorreu um erro inesperado na criação da reserva' });

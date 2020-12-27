@@ -12,7 +12,7 @@ export default {
     findReserve(id) {
         return userLocker.findById(id);
     },
-    async createReserve({ userId, lockerId, startDate, endDate, price, status }) {
+    async createReserve({ userId, lockerId, start_date, end_date, price, status }) {
         const conn = mongoose.connection;
         let session = await conn.startSession();
         try {
@@ -20,8 +20,8 @@ export default {
             await userLocker.create([{ 
                 user_id: new ObjectId(userId), 
                 locker_id: new ObjectId(lockerId), 
-                start_date: startDate, 
-                end_date: endDate, 
+                start_date, 
+                end_date, 
                 price,
                 status
             }], { session });
