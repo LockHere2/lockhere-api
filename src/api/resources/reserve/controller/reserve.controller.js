@@ -32,14 +32,14 @@ export default {
         if (!locker.available) {
             return res.status(400).json({ message: 'Locker não esta disponivel' });
         }
+
+        const result = await reserveRepository.createReserve({ userId: req.user.id, lockerId: _id, start_date, end_date, price, status });
         
-        const sucess = await reserveRepository.createReserve({ userId: req.user.id, lockerId: _id, start_date, end_date, price, status });
-        
-        if (!sucess) {
+        if (!result.sucess) {
             return res.status(500).json({ message: 'Ocorreu um erro inesperado na criação da reserva' });
         }
 
-        return res.status(200).json(locker);
+        return res.status(200).json(result.reserve);
     },
     async updateReserveStatus(req, res) {
         const { id, status } = req.params;
@@ -52,6 +52,7 @@ export default {
             await reserveService.updateReserveStatus(id, status);
             return res.status(200).json({ success: true });
         } catch(e) {
+            console.log(e)
             return res.status(400).json({ message: e });
         }
     },

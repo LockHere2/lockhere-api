@@ -8,14 +8,14 @@ paypal.configure({
 });
 
 export default {
-    createPayment(reservationId, transactions) {
+    createPayment(transactions, paymentTransactionId) {
         const createPaymentJson = {
             intent: "sale",
             payer: {
                 payment_method: "paypal"
             },
             redirect_urls: {
-                return_url: `${env.paypal_sucess_url}?reservationId=${reservationId}&success=true`,
+                return_url: `${env.paypal_sucess_url}?&paymentTransactionId=${paymentTransactionId}&success=true`,
                 cancel_url: env.paypal_error_url
             },
             transactions
@@ -52,14 +52,9 @@ export default {
         });
     },
 
-    refundPayment(saleId, data) {
-        //contexto geral
-        // ele vai executar o pagamento 
-        // vai chamar a api pra finalizar a reserva
-        // vai armazernar o sale id na tabela de payment transactions
-        // se o armario dele for agendado e quiser cancelar, ele ira capturar o saleid atraves do reservation id e chamar este metodo
+    refundPayment(saleId) {
         return new Promise((resolve, reject) => {
-            paypal.sale.refund(saleId, data, function (error, refund) {
+            paypal.sale.refund(saleId, null, function (error, refund) {
                 if (error) {
                     console.error(JSON.stringify(error));
                     reject();

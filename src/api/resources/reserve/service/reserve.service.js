@@ -14,12 +14,8 @@ export default {
 
         if (status === statusEnum.CANCELED &&
             userLocker.status === statusEnum.SCHEDULED &&
-            diff(userLocker.start_date, moment().format('DD.MM.YYYY HH:mm'), 'days') > 0) {
+            diff(userLocker.start_date, moment().format('YYYY-MM-DD HH:mm'), 'days') > 0) {
             throw 'Não é possivel cancelar uma alocação já iniciada';
-        }
-
-        if (status === statusEnum.CANCELED && userLocker.status === statusEnum.SCHEDULED) {
-            // realizar reembolso
         }
 
         await reserveRepository.updateReserveStatus(id, status);
@@ -45,7 +41,7 @@ export default {
         }
 
         if (!start_date) {
-            validator.fields.push(new Field('Data de inicio inválida', 'startDate'));
+            validator.fields.push(new Field('Data de inicio inválida', 'start_date'));
         }
 
         if (isNaN(price)) {

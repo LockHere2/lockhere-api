@@ -17,7 +17,7 @@ export default {
         let session = await conn.startSession();
         try {
             session.startTransaction();
-            await userLocker.create([{ 
+            const [reserve] = await userLocker.create([{ 
                 user_id: new ObjectId(userId), 
                 locker_id: new ObjectId(lockerId), 
                 start_date, 
@@ -27,10 +27,10 @@ export default {
             }], { session });
             await locker.updateOne({ _id: new ObjectId(lockerId) }, { available: NOT_AVAILABLE }, { session });
             await session.commitTransaction();
-            return true;
+            return { sucess: true, reserve };
         } catch (e) {
             await session.abortTransaction();
-            return false;
+            return { sucess: false };
         } finally {
             session.endSession();
         }
