@@ -22,9 +22,9 @@ export default {
             return res.status(400).json(validator);
         }
 
-        const { _id, start_date, end_date, price, status } = req.body;
+        const { locker_id, start_date, end_date, price, status } = req.body;
 
-        const locker = await lockerRepository.findLockerById(_id);
+        const locker = await lockerRepository.findLockerById(locker_id);
         if (!locker) {
             return res.status(400).json({ message: 'Locker não encontrado' });
         }
@@ -33,7 +33,7 @@ export default {
             return res.status(400).json({ message: 'Locker não esta disponivel' });
         }
 
-        const result = await reserveRepository.createReserve({ userId: req.user.id, lockerId: _id, start_date, end_date, price, status });
+        const result = await reserveRepository.createReserve({ user_id: req.user.id, locker_id, start_date, end_date, price, status });
         
         if (!result.sucess) {
             return res.status(500).json({ message: 'Ocorreu um erro inesperado na criação da reserva' });

@@ -2,8 +2,8 @@ import express from 'express';
 import { userRouter } from './resources/user/user.router';
 import { lockerRouter } from './resources/locker/locker.router';
 import { addressRouter } from './resources/address/address.router';
-import { paypalRouter } from './resources/paypal/paypal.router';
-import { paymentTransactionRouter } from './resources/paypal/paymentTransaction.router';
+import { paypalRouter } from './resources/paymentTransaction/paypal.router';
+import { paymentTransactionRouter } from './resources/paymentTransaction/paymentTransaction.router';
 import { reserveRouter } from './resources/reserve/reserve.router';
 
 export const restRouter = express.Router();

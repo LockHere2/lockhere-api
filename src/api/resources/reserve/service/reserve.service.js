@@ -33,11 +33,11 @@ export default {
         return reserveRepository.fetchReservesByUserId(id, options);
     },
 
-    validateReserve({ _id, start_date, end_date, price, status }) {
+    validateReserve({ locker_id, start_date, end_date, price, status }) {
         const validator = new Validator();
 
-        if (!_id) {
-            validator.fields.push(new Field('_id inválido', '_id'));
+        if (!locker_id) {
+            validator.fields.push(new Field('locker_id inválido', 'locker_id'));
         }
 
         if (!start_date) {

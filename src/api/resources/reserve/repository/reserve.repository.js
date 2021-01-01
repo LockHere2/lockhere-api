@@ -12,23 +12,24 @@ export default {
     findReserve(id) {
         return userLocker.findById(id);
     },
-    async createReserve({ userId, lockerId, start_date, end_date, price, status }) {
+    async createReserve({ user_id, locker_id, start_date, end_date, price, status }) {
         const conn = mongoose.connection;
         let session = await conn.startSession();
         try {
             session.startTransaction();
             const [reserve] = await userLocker.create([{ 
-                user_id: new ObjectId(userId), 
-                locker_id: new ObjectId(lockerId), 
+                user_id: new ObjectId(user_id), 
+                locker_id: new ObjectId(locker_id), 
                 start_date, 
                 end_date, 
                 price,
                 status
             }], { session });
-            await locker.updateOne({ _id: new ObjectId(lockerId) }, { available: NOT_AVAILABLE }, { session });
+            await locker.updateOne({ _id: new ObjectId(locker_id) }, { available: NOT_AVAILABLE }, { session });
             await session.commitTransaction();
             return { sucess: true, reserve };
         } catch (e) {
+            console.log(e)
             await session.abortTransaction();
             return { sucess: false };
         } finally {
