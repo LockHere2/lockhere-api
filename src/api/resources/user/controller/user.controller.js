@@ -79,7 +79,7 @@ export default {
       return res.status(e.statusCode).json(e);
     }
   },
-  authenticate(req, res) {
+  profile(req, res) {
     return res.json(req.user);
   }
 };

@@ -15,7 +15,8 @@ export default {
         }
 
         const user = await userRepository.findByCpf(fields.cpf);
-        if (user && user._id !== id) {
+
+        if (user && user._id.toString() !== id.toString()) {
             throw ResponseErrorException.responseError('Já existe um usuário com este cpf', 400);
         }
 
