@@ -7,6 +7,9 @@ import ResponseErrorException from '../../../exception/ResponseErrorException';
 import userConfirmActionEnum from '../enum/userConfirmAction.enum';
 
 export default {
+    async updateProfileImage(id, { image }) {
+        return userRepository.updateUserById(id, { image });
+    },
     async updateBaseInfo(id, fields = { name, cpf, born }) {
         const userValidator = new UserValidator();
         const validator = userValidator.name(fields.name).cpf(fields.cpf).born(fields.born).isValid();
