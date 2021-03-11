@@ -28,7 +28,6 @@ const config = {
     port: 3000,
     geoUri: 'https://api.opencagedata.com/geocode/v1/json',
     geoApiKey: '793b15cd73b4480bb68801a573bc8ea6',
-    geoApiKey: '793b15cd73b4480bb68801a573bc8ea6',
     companyEmail: 'lockherebusiness@gmail.com',
     companyEmailPassword: 'lock123here',
     paypal_environment: 'sandbox',
