@@ -119,7 +119,7 @@ describe('User controller', () => {
     it('should login', async () => {
         await chai.request(app)
             .post('/api/users/login')
-            .send({ email: 'teste@teste.com', password: '123456a' })
+            .send({ email: 'teste@teste.com', password: '123456' })
             .then((res) => {
                 chai.expect(res).to.have.status(200);
                 chai.expect(res.body.token).to.not.eq(null);
