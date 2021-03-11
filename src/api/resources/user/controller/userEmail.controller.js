@@ -1,4 +1,6 @@
 import moment from 'moment';
+import passport from 'passport';
+
 import userEmailService from '../service/userEmail.service';
 import userConfirmActionRepository from '../repository/userConfirmAction.repository';
 import userRepository from '../repository/user.repository';

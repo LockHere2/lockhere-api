@@ -7,6 +7,9 @@ import ResponseErrorException from '../../../exception/ResponseErrorException';
 import userConfirmActionEnum from '../enum/userConfirmAction.enum';
 
 export default {
+    async updateProfileImage(id, { image }) {
+        return userRepository.updateUserById(id, { image });
+    },
     async updateBaseInfo(id, fields = { name, cpf, born }) {
         const userValidator = new UserValidator();
         const validator = userValidator.name(fields.name).cpf(fields.cpf).born(fields.born).isValid();
@@ -15,7 +18,8 @@ export default {
         }
 
         const user = await userRepository.findByCpf(fields.cpf);
-        if (user && user._id !== id) {
+
+        if (user && user._id.toString() !== id.toString()) {
             throw ResponseErrorException.responseError('Já existe um usuário com este cpf', 400);
         }
 
@@ -44,7 +48,7 @@ export default {
             throw ResponseErrorException.responseError('Já existe um usuário com este email', 400);
         }
 
-        const { action, confirm_code, expire } = await userConfirmActionRepository.findUserConfirmActionByUserId(user._id);
+        const { action, confirm_code, expire } = await userConfirmActionRepository.findUserConfirmActionByUserId(id);
 
         if (!confirm_code) {
             throw ResponseErrorException.responseError('Você não possuí um código de verificação', 400);

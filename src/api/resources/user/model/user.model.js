@@ -24,6 +24,9 @@ const userSchema = new Schema({
     type: Date,
     required: true
   },
+  image: {
+    type: String
+  },
   verified: {
     type: Boolean,
     default: false

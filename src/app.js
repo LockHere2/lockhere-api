@@ -7,8 +7,7 @@ import { restRouter } from './api';
 import swaggerDocument from './config/swagger.json';
 import { configJWTStrategy } from './api/middlewares/passport-jwt';
 
-// TELEMETRIA
-require('appmetrics-dash').attach();
+require('newrelic');
 
 const app = express();
 app.disable("x-powered-by");

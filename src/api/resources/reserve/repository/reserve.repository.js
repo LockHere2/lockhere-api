@@ -9,25 +9,29 @@ const NOT_AVAILABLE = 0;
 const FETCH_LIMIT = 10;
 
 export default {
-    async createReserve({ userId, lockerId, startDate, endDate, price, status }) {
+    findReserve(id) {
+        return userLocker.findById(id);
+    },
+    async createReserve({ user_id, locker_id, start_date, end_date, price, status }) {
         const conn = mongoose.connection;
         let session = await conn.startSession();
         try {
             session.startTransaction();
-            await userLocker.create([{ 
-                user_id: new ObjectId(userId), 
-                locker_id: new ObjectId(lockerId), 
-                start_date: startDate, 
-                end_date: endDate, 
+            const [reserve] = await userLocker.create([{ 
+                user_id: new ObjectId(user_id), 
+                locker_id: new ObjectId(locker_id), 
+                start_date, 
+                end_date, 
                 price,
                 status
             }], { session });
-            await locker.updateOne({ _id: new ObjectId(lockerId) }, { available: NOT_AVAILABLE }, { session });
+            await locker.updateOne({ _id: new ObjectId(locker_id) }, { available: NOT_AVAILABLE }, { session });
             await session.commitTransaction();
-            return true;
+            return { sucess: true, reserve };
         } catch (e) {
+            console.log(e)
             await session.abortTransaction();
-            return false;
+            return { sucess: false };
         } finally {
             session.endSession();
         }
@@ -56,7 +60,7 @@ export default {
 
     },
     async fetchReservesByUserId(id, options = { page: 1, orderBy: 'start_date', direction: 'asc' }) {
-        const userReservations = await userLocker.find({ user_id: new ObjectId(id) })
+        const userReservations = await userLocker.find({ user_id: new ObjectId(id), status: { $in: options.status } })
             .limit(FETCH_LIMIT)
             .skip((options.page * FETCH_LIMIT) - FETCH_LIMIT)
             .sort({ [options.orderBy]: options.direction })

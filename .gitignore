@@ -6,3 +6,4 @@ docs.md
 .scannerwork
 .nyc_output
 coverage
+newrelic_agent.log

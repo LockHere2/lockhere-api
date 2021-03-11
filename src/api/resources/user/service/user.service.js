@@ -29,7 +29,7 @@ export default {
     return validator.email(email).password(password).isValid();
   },
   updateUser(id, body, mode) {
-    const { BASE_INFO, EMAIL, PASSWORD } = userModeEnum;
+    const { BASE_INFO, EMAIL, PASSWORD, IMAGE } = userModeEnum;
     switch(mode) {
       case BASE_INFO:
         return userUpdateService.updateBaseInfo(id, body);
@@ -37,6 +37,8 @@ export default {
         return userUpdateService.updatePassword(id, body);
       case EMAIL:
         return userUpdateService.updateEmail(id, body);
+      case IMAGE:
+        return userUpdateService.updateProfileImage(id, body);
       default:
         throw ResponseErrorException.responseError('Modo invalido', 400);
     }
