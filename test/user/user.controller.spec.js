@@ -8,6 +8,7 @@ chai.use(http);
 chai.use(subSet);
 
 let userInput = {};
+let token = '';
 
 describe('User controller', () => {
     beforeEach(() => {
@@ -29,6 +30,7 @@ describe('User controller', () => {
                 chai.expect(res).to.have.status(200);
                 chai.expect(res.body.success).eq(true);
                 chai.expect(res.body.token).not.eq(null);
+                token = res.body.token;
             });
     });
 
@@ -116,6 +118,16 @@ describe('User controller', () => {
             });
     });
 
+    it('should avoid sql injection login', async () => {
+        await chai.request(app)
+            .post('/api/users/login')
+            .send({ email: '{ "$ne": 1 }', password: '123456' })
+            .then((res) => {
+                chai.expect(res).to.have.status(400);
+                chai.expect(res.body.fields[0].message).to.eq('Email inválido');
+            });
+    });
+
     it('should login', async () => {
         await chai.request(app)
             .post('/api/users/login')
@@ -123,6 +135,26 @@ describe('User controller', () => {
             .then((res) => {
                 chai.expect(res).to.have.status(200);
                 chai.expect(res.body.token).to.not.eq(null);
+            });
+    });
+
+    it('should send confirm code', async () => {
+        await chai.request(app)
+            .post('/api/users/user/send-confirm-code')
+            .set('Authorization', 'Bearer ' + token)
+            .send({ action: 'active_email' })
+            .then((res) => {
+                chai.expect(res).to.have.status(200);
+            });
+    });
+
+    it('should active email', async () => {
+        await chai.request(app)
+            .patch('/api/users/user/update/email')
+            .set('Authorization', 'Bearer ' + token)
+            .send({ email: 'teste@teste.com', code: '1234' })
+            .then((res) => {
+                chai.expect(res.status).to.eq(200);
             });
     });
 });
