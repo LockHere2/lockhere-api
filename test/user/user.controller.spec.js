@@ -138,23 +138,23 @@ describe('User controller', () => {
             });
     });
 
-    it('should send confirm code', async () => {
-        await chai.request(app)
-            .post('/api/users/user/send-confirm-code')
-            .set('Authorization', 'Bearer ' + token)
-            .send({ action: 'active_email' })
-            .then((res) => {
-                chai.expect(res).to.have.status(200);
-            });
-    });
+    // it('should send confirm code', async () => {
+    //     await chai.request(app)
+    //         .post('/api/users/user/send-confirm-code')
+    //         .set('Authorization', 'Bearer ' + token)
+    //         .send({ action: 'active_email' })
+    //         .then((res) => {
+    //             chai.expect(res).to.have.status(200);
+    //         });
+    // });
 
-    it('should active email', async () => {
-        await chai.request(app)
-            .patch('/api/users/user/update/email')
-            .set('Authorization', 'Bearer ' + token)
-            .send({ email: 'teste@teste.com', code: '1234' })
-            .then((res) => {
-                chai.expect(res.status).to.eq(200);
-            });
-    });
+    // it('should active email', async () => {
+    //     await chai.request(app)
+    //         .patch('/api/users/user/update/email')
+    //         .set('Authorization', 'Bearer ' + token)
+    //         .send({ email: 'teste@teste.com', code: '1234' })
+    //         .then((res) => {
+    //             chai.expect(res.status).to.eq(200);
+    //         });
+    // });
 });
