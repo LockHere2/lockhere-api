@@ -10,7 +10,7 @@ import { configJWTStrategy } from './api/middlewares/passport-jwt';
 require('newrelic');
 
 const app = express();
-app.disable("x-powered-by");
+// app.disable("x-powered-by");
 
 const PORT = process.env.PORT || 3000;
 
