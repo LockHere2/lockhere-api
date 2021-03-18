@@ -137,6 +137,7 @@ describe('User controller', () => {
                 chai.expect(res.body.token).to.not.eq(null);
             });
     });
+    
 
     // it('should send confirm code', async () => {
     //     await chai.request(app)
