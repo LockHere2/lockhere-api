@@ -121,10 +121,20 @@ describe('User controller', () => {
     it('should avoid sql injection login', async () => {
         await chai.request(app)
             .post('/api/users/login')
-            .send({ email: '{ "$ne": 1 }', password: '123456' })
+            .send({ email: { "$ne": 1 }, password: '123456' })
             .then((res) => {
                 chai.expect(res).to.have.status(400);
                 chai.expect(res.body.fields[0].message).to.eq('Email inválido');
+            });
+    });
+
+    it('should avoid sql injection password', async () => {
+        await chai.request(app)
+            .post('/api/users/login')
+            .send({ email: 'teste@teste.com', password: { "$ne": 1 } })
+            .then((res) => {
+                chai.expect(res).to.have.status(400);
+                chai.expect(res.body.fields[0].message).to.eq('Senha inválida');
             });
     });
 
@@ -137,7 +147,7 @@ describe('User controller', () => {
                 chai.expect(res.body.token).to.not.eq(null);
             });
     });
-    
+
 
     // it('should send confirm code', async () => {
     //     await chai.request(app)
