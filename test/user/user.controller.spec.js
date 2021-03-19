@@ -148,7 +148,6 @@ describe('User controller', () => {
             });
     });
 
-
     // it('should send confirm code', async () => {
     //     await chai.request(app)
     //         .post('/api/users/user/send-confirm-code')
